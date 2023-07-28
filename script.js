@@ -22,6 +22,7 @@ form.addEventListener("submit", (event) => {
     } else if (contraseña.value !== confirmarContaseña.value) {
         campoError.innerHTML = `las contraseñas no coinciden`;
         campoError.style.color = "red"
+        confirmarContaseña.classList.add("validacionErronea")
     }
     else {
        
@@ -30,9 +31,13 @@ form.addEventListener("submit", (event) => {
 })
 
 const LoginExitoso = () => {
+    //lista de inputs
     const lista = [nombre,correo, contraseña, confirmarContaseña]
+    //inputs que tiene la clase validacionErronea por si ya intentaron ingresar y no pusieron bien las credenciales
     const listaFiltrada = lista.filter(elem => elem.classList.contains("validacionErronea"))
+    // mapeo que saca la clase validacionErronea de los inputs que antes estaban errones
     listaFiltrada.map(elem => elem.classList.remove("validacionErronea"))
+    // mapeo que agrega a todos los input la clase validacionExitosa
     lista.map(elem => elem.classList.add("validacionExitosa"))
     campoError.style.color = "#14ff14"
     campoError.innerHTML = "Validacion Exitosa";
